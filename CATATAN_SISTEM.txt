@@ -1,0 +1,43 @@
+CATATAN SISTEM & PANDUAN OPERASIONAL
+Bellen Beans Coffee - Integrated System
+
+
+------------------------------------------------------
+1. KEBERSIHAN & KEAMANAN SISTEM
+   - File Debug/Percobaan (debug_order.php, debug_customers.php) SUDAH DIHAPUS.
+   - Folder sistem sekarang bersih dan siap untuk produksi.
+   - PENTING: Jangan sembarangan upload file .php baru ke folder utama agar tidak ada celah keamanan.
+
+2. ATURAN PENGGUNAAN FITUR BARU
+   A. DISKON MANUAL
+      - Fitur: Input nominal diskon (Rp) di keranjang.
+      - SOP: Pastikan hanya Kasir yang berwenang yang memasukkan diskon. 
+      - Monitoring: Cek "Laporan Penjualan" kolom "Diskon" setiap tutup shift untuk menghindari kecurangan.
+
+   B. TUKAR POIN (LOYALTY)
+      - Fitur: 10.000 Belanja = 1 Poin (Otomatis).
+      - Tukar: 1 Poin = Rp 100 Diskon.
+      - Syarat: Wajib input Nama Pelanggan yang terdaftar. Jika poin cukup, tombol saklar akan muncul.
+
+3. KEAMANAN SESI (AUTO LOGOUT)
+   - Sistem akan OTOMATIS LOGOUT jika tidak ada aktivitas mouse/keyboard selama 60 MENIT (1 Jam).
+   - Tujuannya agar akun tidak disalahgunakan saat ditinggal istirahat.
+   - Jika tiba-tiba keluar ke halaman login, itu bukan error, tapi fitur keamanan.
+
+4. LAPORAN KEUANGAN
+   - Format: Gunakan tombol "Export ke Excel" di menu Riwayat Transaksi.
+   - Kolom Baru: Laporan sekarang mencakup rincian Subtotal, Potongan Diskon, Potongan Poin, dan Pajak secara terpisah.
+   - Net Profit: Omset Bersih = Total Uang Masuk (setelah diskon).
+
+5. TROUBLESHOOTING RINGAN
+   - Jika tombol "Bayar" tidak bisa diklik: Refresh halaman (F5).
+   - Jika printer tidak merespon: Cek kabel USB & driver printer.
+   - Jika ada error "Transaction Failed": Cek koneksi internet/database, lalu coba lagi.
+
+6. TEKNIS
+   - File Konfigurasi Database: config/database.php
+   - File Pengaturan Toko: config/settings.php
+
+Simpan catatan ini sebagai referensi cepat untuk Manajer/Owner.
+------------------------------------------------------
+Powered by bellen beans coffee

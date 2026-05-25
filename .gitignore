@@ -1,0 +1,9 @@
+# Temporary and testing files
+kasir_output.html
+test.php
+check_db.php
+
+# PHP / Web Server stuff
+.vscode/
+.idea/
+*.log
