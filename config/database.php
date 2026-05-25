@@ -7,7 +7,14 @@ $whitelistLocal = array(
     'localhost'
 );
 
-if (php_sapi_name() === 'cli' || in_array($_SERVER['REMOTE_ADDR'], $whitelistLocal) || in_array($_SERVER['HTTP_HOST'], $whitelistLocal)) {
+$isLocal = false;
+if (isset($_SERVER['HTTP_HOST']) && in_array($_SERVER['HTTP_HOST'], $whitelistLocal)) {
+    $isLocal = true;
+} elseif (php_sapi_name() === 'cli' && !getenv('VERCEL')) {
+    $isLocal = true;
+}
+
+if ($isLocal) {
     // KONEKSI LOKAL (XAMPP)
     $host = 'localhost';
     $username = 'root';
