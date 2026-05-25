@@ -57,7 +57,22 @@ if (in_array($role, ['admin', 'manajer', 'owner'])) {
     $chartLabels = json_encode(array_column($chartData, 'date'));
     $chartValues = json_encode(array_column($chartData, 'total'));
 
-    // 5. Total Daily Expenses (Pre-fetching for Stats)
+    // 5. Customer Insights (Dine-in vs Take-away) Today
+    $dineInCount = safeFetch($conn, "SELECT COUNT(*) as total FROM transactions WHERE DATE(transaction_date) = CURDATE() AND order_type = 'dine_in'", 'total');
+    $takeAwayCount = safeFetch($conn, "SELECT COUNT(*) as total FROM transactions WHERE DATE(transaction_date) = CURDATE() AND order_type = 'take_away'", 'total');
+
+    // 6. Jam Sibuk (Busiest Hour Today)
+    $peakHourQuery = $conn->query("
+        SELECT HOUR(transaction_date) as hour, COUNT(*) as count 
+        FROM transactions 
+        WHERE DATE(transaction_date) = CURDATE() 
+        GROUP BY HOUR(transaction_date) 
+        ORDER BY count DESC LIMIT 1
+    ");
+    $peakHourData = $peakHourQuery && $peakHourQuery->num_rows > 0 ? $peakHourQuery->fetch_assoc() : ['hour' => '-', 'count' => 0];
+    $peakHourStr = $peakHourData['hour'] !== '-' ? sprintf("%02d:00 - %02d:00", $peakHourData['hour'], $peakHourData['hour'] + 1) : "Belum ada";
+
+    // 7. Total Daily Expenses (Pre-fetching for Stats)
     $expensesToday = safeFetch($conn, "SELECT SUM(amount) as total FROM expenses WHERE DATE(expense_date) = CURDATE()", 'total');
     
     // 6. Total Monthly Expenses
@@ -562,6 +577,39 @@ if (in_array($role, ['admin', 'manajer', 'owner'])) {
                                         <?php endwhile; ?>
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Customer & Traffic Insights -->
+                    <div class="panel" style="background: var(--bg-surface); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.05); margin-bottom: 2rem;">
+                        <h3 style="margin-top:0; margin-bottom: 1.5rem; font-size: 1.2rem; color: var(--text-main);">
+                            <i class="fas fa-users" style="color: var(--primary);"></i> Wawasan Pengunjung (Hari Ini)
+                        </h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                            <!-- Total Visitors -->
+                            <div style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); text-align: center;">
+                                <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">Total Transaksi / Mampir</div>
+                                <div style="font-size: 2rem; font-weight: bold; color: white;"><?= $trxToday ?></div>
+                            </div>
+                            
+                            <!-- Dine In vs Take Away -->
+                            <div style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); text-align: center;">
+                                <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">Dine-In vs Take-Away</div>
+                                <div style="display: flex; justify-content: center; gap: 1rem; font-size: 1.1rem; font-weight: bold;">
+                                    <span style="color: var(--accent-green);"><i class="fas fa-utensils"></i> <?= $dineInCount ?></span>
+                                    <span style="color: #6b7280;">|</span>
+                                    <span style="color: var(--primary);"><i class="fas fa-shopping-bag"></i> <?= $takeAwayCount ?></span>
+                                </div>
+                            </div>
+
+                            <!-- Busiest Hour -->
+                            <div style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); text-align: center;">
+                                <div style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">Jam Paling Sibuk</div>
+                                <div style="font-size: 1.5rem; font-weight: bold; color: #fbbf24;">
+                                    <i class="fas fa-clock" style="font-size: 1.2rem; margin-right: 5px;"></i> <?= $peakHourStr ?>
+                                </div>
+                                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;"><?= $peakHourData['count'] ?> Transaksi</div>
                             </div>
                         </div>
                     </div>
