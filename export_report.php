@@ -49,7 +49,9 @@ if ($format === 'excel') {
             .num { mso-number-format:"\#\,\#\#0"; text-align: right; }
             .text { mso-number-format:"\@"; }
           </style>';
-    echo '</head><body>';
+    echo '
+    <?php @include 'includes/analytics.php'; ?>
+</head><body>';
     
     echo '<h2 style="text-align:center;">LAPORAN PENJUALAN - ' . strtoupper($storeName) . '</h2>';
     echo '<p style="text-align:center;">Periode: ' . $startDate . ' s/d ' . $endDate . '</p>';
@@ -141,7 +143,9 @@ if ($format === 'excel') {
                 body { padding: 0; }
             }
         </style>
-    </head>
+    
+    <?php @include 'includes/analytics.php'; ?>
+</head>
     <body onload="window.print()">
         <div class="no-print" style="margin-bottom: 20px;">
             <button onclick="window.print()" style="padding: 10px 20px; cursor: pointer;">Cetak Laporan</button>

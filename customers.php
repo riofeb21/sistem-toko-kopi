@@ -66,6 +66,8 @@ $customers = $conn->query("SELECT * FROM customers ORDER BY customer_name ASC");
         .modal-content { background: var(--bg-surface); padding: 2rem; border-radius: var(--radius-md); width: 100%; max-width: 500px; position: relative; border: 1px solid rgba(255,255,255,0.1); }
         .close-modal { position: absolute; top: 1rem; right: 1rem; color: var(--text-muted); cursor: pointer; font-size: 1.5rem; }
     </style>
+
+    <?php @include 'includes/analytics.php'; ?>
 </head>
 <body>
     <!-- Floating Coffee Beans Decoration -->

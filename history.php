@@ -79,6 +79,8 @@ $transactions = $stmt->get_result();
             overflow-y: auto;
         }
     </style>
+
+    <?php @include 'includes/analytics.php'; ?>
 </head>
 <body>
     <!-- Coffee Steam Decoration -->

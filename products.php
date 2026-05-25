@@ -154,6 +154,8 @@ while($c = $categories->fetch_assoc()) $cats[] = $c;
             font-size: 1.5rem;
         }
     </style>
+
+    <?php @include 'includes/analytics.php'; ?>
 </head>
 <body>
     <!-- Floating Coffee Beans Decoration -->

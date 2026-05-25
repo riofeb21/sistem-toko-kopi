@@ -42,7 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'store_phone' => $_POST['store_phone'],
             'tax_rate' => floatval($_POST['tax_rate']),
             'footer_note' => $_POST['footer_note'],
-            'theme_color' => $_POST['theme_color']
+            'theme_color' => $_POST['theme_color'],
+            'ga_measurement_id' => $_POST['ga_measurement_id'] ?? ''
         ];
         
         if (file_put_contents('config/app_settings.json', json_encode($newSettings, JSON_PRETTY_PRINT))) {
@@ -91,6 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             width: 100%; height: 40px; padding: 0.2rem; background: var(--bg-body); border: 1px solid #444; border-radius: var(--radius-sm);
         }
     </style>
+
+    <?php @include 'includes/analytics.php'; ?>
 </head>
 <body>
     <!-- Coffee Steam and Bubbles Decoration -->
@@ -147,6 +150,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <label>Warna Tema</label>
                                 <input type="color" name="theme_color" value="<?= getSetting('theme_color') ?>" class="color-picker">
                             </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-chart-line" style="color: var(--primary);"></i> Google Analytics (Measurement ID)</label>
+                            <input type="text" name="ga_measurement_id" value="<?= getSetting('ga_measurement_id') ?>" placeholder="Contoh: G-XXXXXXXXXX" class="form-input">
+                            <small style="color: var(--text-muted);">Biarkan kosong jika tidak digunakan.</small>
                         </div>
 
                         <div class="form-group">

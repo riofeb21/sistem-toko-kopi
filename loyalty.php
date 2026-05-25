@@ -217,6 +217,8 @@ if ($search) {
             color: var(--primary);
         }
     </style>
+
+    <?php @include 'includes/analytics.php'; ?>
 </head>
 <body>
     <div class="bg-glow"></div>

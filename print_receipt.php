@@ -72,6 +72,8 @@ $taxAmount = $transaction['total_amount'] - $subtotal;
             body { margin: 0; padding: 0; width: auto; }
         }
     </style>
+
+    <?php @include 'includes/analytics.php'; ?>
 </head>
 <body onload="window.print()">
     

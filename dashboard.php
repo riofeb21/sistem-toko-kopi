@@ -340,6 +340,8 @@ if (in_array($role, ['admin', 'manajer', 'owner'])) {
             flex-shrink: 0;
         }
     </style>
+
+    <?php @include 'includes/analytics.php'; ?>
 </head>
 <body>
     <!-- Coffee Drips Decoration -->

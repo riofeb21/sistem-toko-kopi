@@ -75,6 +75,8 @@ $monthTotal = $monthTotalQuery->fetch_assoc()['total'] ?? 0;
         .modal.active { display: flex; }
         .modal-content { background: var(--bg-surface); padding: 2rem; border-radius: var(--radius-md); width: 100%; max-width: 500px; position: relative; border: 1px solid rgba(255,255,255,0.1); }
     </style>
+
+    <?php @include 'includes/analytics.php'; ?>
 </head>
 <body>
     <div class="dashboard-layout" style="grid-template-columns: 260px 1fr;">
