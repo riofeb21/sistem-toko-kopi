@@ -14,12 +14,11 @@ if (php_sapi_name() === 'cli' || in_array($_SERVER['REMOTE_ADDR'], $whitelistLoc
     $password = ''; 
     $database = 'toko_kopi_db';
 } else {
-    // KONEKSI HOSTING (INFINITEFREE)
-    // Sesuai screenshot user
-    $host = 'sql310.infinityfree.com';
-    $username = 'if0_40780482';     
-    $password = 'Riofeb211'; 
-    $database = 'if0_40780482_toko_kopi_db';   
+    // KONEKSI HOSTING (CLEVER CLOUD)
+    $host = 'bfcg8egvywyx2pzwnd4n-mysql.services.clever-cloud.com';
+    $username = 'uric2rgxkblbu15t';     
+    $password = 'g3O0aa1N6LNbao4ZFHKB'; 
+    $database = 'bfcg8egvywyx2pzwnd4n';   
 }
 
 $conn = new mysqli($host, $username, $password, $database);

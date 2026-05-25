@@ -7,3 +7,5 @@ check_db.php
 .vscode/
 .idea/
 *.log
+
+.vercel
