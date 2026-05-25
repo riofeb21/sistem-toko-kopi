@@ -127,6 +127,31 @@ class MockMySQLiResult {
 
         // 3. Products
         if (strpos($sql, 'from products') !== false) {
+            if (strpos($sql, 'stock < 10') !== false) {
+                return [
+                    [
+                        'product_id' => 6,
+                        'product_name' => 'Croissant Almond (Low Stock)',
+                        'price' => 25000,
+                        'stock' => 2,
+                        'category_id' => 3,
+                        'category_name' => 'Bakery & Pastry',
+                        'image_url' => 'assets/images/default.jpg',
+                        'is_available' => 1
+                    ],
+                    [
+                        'product_id' => 3,
+                        'product_name' => 'Nasi Goreng Spesial (Low Stock)',
+                        'price' => 28000,
+                        'stock' => 5,
+                        'category_id' => 4,
+                        'category_name' => 'Main Course & Snacks',
+                        'image_url' => 'assets/images/default.jpg',
+                        'is_available' => 1
+                    ]
+                ];
+            }
+            
             return [
                 [
                     'product_id' => 10,
@@ -220,11 +245,46 @@ class MockMySQLiResult {
             ];
         }
 
-        // 5. Customer Insights (Dashboard Wawasan Pengunjung)
+        // 5. Summary / Count / Sum queries (Stats & Customer Insights)
         if (strpos($sql, 'count(') !== false || strpos($sql, 'sum(') !== false) {
-            // Return mock totals for insights metrics
+            $total = 0;
+            
+            if (strpos($sql, 'products') !== false) {
+                // Low stock count
+                $total = 2;
+            } elseif (strpos($sql, 'customers') !== false) {
+                // Total customers
+                $total = 12;
+            } elseif (strpos($sql, 'expenses') !== false) {
+                if (strpos($sql, 'month(') !== false) {
+                    $total = 180000; // monthly expenses
+                } else {
+                    $total = 37000; // today expenses
+                }
+            } elseif (strpos($sql, 'transactions') !== false) {
+                if (strpos($sql, 'order_type') !== false) {
+                    if (strpos($sql, 'dine_in') !== false || strpos($sql, 'dine-in') !== false) {
+                        $total = 11;
+                    } else {
+                        $total = 7;
+                    }
+                } elseif (strpos($sql, 'month(') !== false) {
+                    $total = 3450000; // monthly revenue
+                } elseif (strpos($sql, 'curdate()') !== false) {
+                    if (strpos($sql, 'sum(total_amount)') !== false) {
+                        $total = 450000; // today's income
+                    } else {
+                        $total = 18; // today's transactions
+                    }
+                } else {
+                    // Chart data or other general transaction sum
+                    $total = rand(150000, 600000);
+                }
+            }
+            
             return [
                 [
+                    'total' => $total,
                     'total_sales' => 1485000,
                     'total_transactions' => 64,
                     'total_visitors' => 95,
@@ -233,6 +293,11 @@ class MockMySQLiResult {
                     'peak_hour' => '14:00 - 16:00'
                 ]
             ];
+        }
+
+        // 5b. Peak hour query helper
+        if (strpos($sql, 'hour(transaction_date)') !== false) {
+            return [['hour' => 15, 'count' => 8]];
         }
 
         // 6. Transactions list (History & Reports)
