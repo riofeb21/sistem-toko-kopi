@@ -97,7 +97,7 @@ class MockMySQLiResult {
                     'user_id' => 2,
                     'username' => 'kasir',
                     'password' => 'kasir',
-                    'role' => 'cashier',
+                    'role' => 'kasir',
                     'full_name' => 'Kasir Bellen Beans'
                 ]
             ];
@@ -135,7 +135,8 @@ class MockMySQLiResult {
                     'stock' => 45,
                     'category_id' => 1,
                     'category_name' => 'Coffee & Espresso',
-                    'image_url' => 'assets/images/default.jpg'
+                    'image_url' => 'assets/images/default.jpg',
+                    'is_available' => 1
                 ],
                 [
                     'product_id' => 9,
@@ -144,7 +145,8 @@ class MockMySQLiResult {
                     'stock' => 99,
                     'category_id' => 1,
                     'category_name' => 'Coffee & Espresso',
-                    'image_url' => 'assets/images/default.jpg'
+                    'image_url' => 'assets/images/default.jpg',
+                    'is_available' => 1
                 ],
                 [
                     'product_id' => 8,
@@ -153,7 +155,8 @@ class MockMySQLiResult {
                     'stock' => 30,
                     'category_id' => 2,
                     'category_name' => 'Non-Coffee Latte',
-                    'image_url' => 'assets/images/default.jpg'
+                    'image_url' => 'assets/images/default.jpg',
+                    'is_available' => 1
                 ],
                 [
                     'product_id' => 7,
@@ -162,7 +165,8 @@ class MockMySQLiResult {
                     'stock' => 25,
                     'category_id' => 2,
                     'category_name' => 'Non-Coffee Latte',
-                    'image_url' => 'assets/images/default.jpg'
+                    'image_url' => 'assets/images/default.jpg',
+                    'is_available' => 1
                 ],
                 [
                     'product_id' => 6,
@@ -171,7 +175,8 @@ class MockMySQLiResult {
                     'stock' => 12,
                     'category_id' => 3,
                     'category_name' => 'Bakery & Pastry',
-                    'image_url' => 'assets/images/default.jpg'
+                    'image_url' => 'assets/images/default.jpg',
+                    'is_available' => 1
                 ],
                 [
                     'product_id' => 5,
@@ -180,7 +185,8 @@ class MockMySQLiResult {
                     'stock' => 15,
                     'category_id' => 3,
                     'category_name' => 'Bakery & Pastry',
-                    'image_url' => 'assets/images/default.jpg'
+                    'image_url' => 'assets/images/default.jpg',
+                    'is_available' => 1
                 ],
                 [
                     'product_id' => 4,
@@ -189,7 +195,8 @@ class MockMySQLiResult {
                     'stock' => 20,
                     'category_id' => 4,
                     'category_name' => 'Main Course & Snacks',
-                    'image_url' => 'assets/images/default.jpg'
+                    'image_url' => 'assets/images/default.jpg',
+                    'is_available' => 1
                 ],
                 [
                     'product_id' => 3,
@@ -198,7 +205,8 @@ class MockMySQLiResult {
                     'stock' => 15,
                     'category_id' => 4,
                     'category_name' => 'Main Course & Snacks',
-                    'image_url' => 'assets/images/default.jpg'
+                    'image_url' => 'assets/images/default.jpg',
+                    'is_available' => 1
                 ]
             ];
         }

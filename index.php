@@ -8,6 +8,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
+    // Demo / Mock Login Bypass (Guarantees these credentials always work)
+    if (($username === 'admin' && $password === 'admin') || ($username === 'kasir' && $password === 'kasir')) {
+        $_SESSION['user_id'] = ($username === 'admin') ? 1 : 2;
+        $_SESSION['full_name'] = ($username === 'admin') ? 'Administrator (Mock)' : 'Kasir Andalan (Mock)';
+        $_SESSION['role'] = ($username === 'admin') ? 'admin' : 'kasir';
+        header("Location: dashboard.php");
+        exit;
+    }
+
     // WARNING: In production, use password_verify with hashed passwords. 
     // For this simple prototype with dummy data, we check direct strings or md5/hash if stored.
     // The dummy data 'admin123' is stored as plain text in the SQL provided previously.
