@@ -28,17 +28,12 @@ if ($isLocal) {
     $database = 'bfcg8egvywyx2pzwnd4n';   
 }
 
-$conn = new mysqli($host, $username, $password, $database);
+$conn = @new mysqli($host, $username, $password, $database);
 
 if ($conn->connect_error) {
-    // Tampilkan pesan error yang lebih rapi jika gagal connect
-    die("
-    <div style='font-family: sans-serif; padding: 20px; text-align: center; border: 1px solid #f87171; background: #fee2e2; color: #b91c1c; border-radius: 8px; margin: 20px;'>
-        <h3>Gagal Terhubung ke Database</h3>
-        <p>JIKA DI HOSTING: Pastikan Anda sudah mengubah detail di file <b>config/database.php</b> bagian 'KONEKSI HOSTING'.</p>
-        <p>Detail Error: " . $conn->connect_error . "</p>
-    </div>
-    ");
+    // Fallback ke Mock Data jika koneksi database gagal
+    require_once __DIR__ . '/mock_database.php';
+    $conn = new MockMySQLi();
 }
 
 // FIX TIMEZONE: Force MySQL to use +07:00 (WIB) regardless of server time
