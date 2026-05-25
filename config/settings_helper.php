@@ -10,7 +10,8 @@ $defaultSettings = [
     'tax_rate' => 10,
     'footer_note' => 'Terima Kasih atas Kunjungan Anda!',
     'currency_symbol' => 'Rp',
-    'theme_color' => '#D4A373' 
+    'theme_color' => '#D4A373',
+    'ga_measurement_id' => 'G-HQM17DJ1JW' 
 ];
 
 // Load Settings
